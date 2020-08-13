@@ -1,0 +1,148 @@
+
+  <select ng-model="option_name" ng-change="selectedOption(option_name)">
+    <option>Last 24 hours</option>
+    <option>My Options</option>
+    <option>option 1</option>
+    <option>option 2</option>
+    <option>option 3</option>
+    <option>option 4</option>
+  </select>
+  <div *ngFor="let sqlser of sqlserver">
+  <div class="jumbotron">
+    <h1 class="display-4">{{ sqlser.instance.name }}</h1>
+    <p class="lead">
+      Host Server: {{ sqlser.instance.physicalServerName }} ({{
+        sqlser.instance.osName
+      }}
+      )
+    </p>
+    <hr class="my-4" />
+    <p>
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="isDetailsCollapsed = !isDetailsCollapsed"
+        [attr.aria-expanded]="!isDetailsCollapsed"
+        aria-controls="collapseExample"
+      >
+        Instance Details
+      </button>
+    </p>
+
+    <div id="collapseExample" [ngbCollapse]="isDetailsCollapsed">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">
+                <b>SQL Version</b>: {{ sqlser.instance.sqlVersion }} <br />
+                <b>Collation</b>: {{ sqlser.instance.sqlCollation }} <br />
+                <b>Created</b>: {{ sqlser.instance.sqlCreateDate }} <br />
+                <b>Edition</b>: {{ sqlser.instance.sqlEdition }} <br />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text">
+                <b>Number of Databases</b>: {{ sqlser.instance.noOfDatabases }}
+                <br />
+                <ng-template
+                  *ngIf="
+                    sqlser.instance.isClustered === 1;
+                    then isClustered;
+                    else notClustered
+                  "
+                ></ng-template>
+                <ng-template #isClustered>
+                  <b>Clustered</b>: true<br />
+                </ng-template>
+                <ng-template #notClustered>
+                  <b>Clustered</b>: false<br />
+                </ng-template>
+                <ng-template
+                  *ngIf="
+                    sqlser.instance.isAlwaysOn === 1;
+                    then isAlwaysOn;
+                    else notAlwaysOn
+                  "
+                ></ng-template>
+                <ng-template #isAlwaysOn>
+                  <b>AlwaysOn</b>: true<br />
+                </ng-template>
+                <ng-template #notAlwaysOn>
+                  <b>AlwaysOn</b>: false<br />
+                </ng-template>
+                <b>Page Life Expectancy</b>: {{ instancestats.ple }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div>
+      <p>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isDetailsCollapsed"
+          aria-controls="collapseExample"
+        >
+          Databases
+        </button>
+      </p>
+      <div id="collapseExample" [ngbCollapse]="isCollapsed">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <p class="card-text"></p>
+                <table class="table table-striped">
+                  <thead>
+                    <tr class="table-primary">
+                      <th scope="col">Name</th>
+                      <th scope="col">Data File Used</th>
+                      <th scope="col">Log File Used</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let database of databases" class="table-active">
+                      <td>{{ database.name }}</td>
+                      <td>{{ database.dataFileUsed }}%</td>
+                      <td>{{ database.logFileUsed }}%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    <div>
+      
+      
+    </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col">
+      <app-ram-stats></app-ram-stats>
+    </div>
+    <div class="col">
+      <app-cpu-stats></app-cpu-stats>
+    </div>
+    <div class="col">
+      <app-disk-io-stats></app-disk-io-stats>
+    </div>
+  </div>
+</div>

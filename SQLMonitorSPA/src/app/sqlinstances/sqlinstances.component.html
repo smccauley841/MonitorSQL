@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row row-cols-5 row-cols-md-4">
+    <div class="col mb-3" *ngFor="let serverstat of sqlserverinstances">
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">
+          <p style="font-size: 15px;"><a href="#" [routerLink]="['/instances/',serverstat.instance.id]">{{serverstat.instance.name}}</a></p> </div>
+        <div class="card-body">
+          <p class="card-text" style="font-size: 15px;">Server: {{ serverstat.instance.physicalServerName}}</p>
+          <p class="card-text" style="font-size: 15px;">CPU: {{ serverstat.cpu }}</p>
+          <p class="card-text" style="font-size: 15px;">RAM: {{ serverstat.ram }}</p>
+          <p class="card-text" style="font-size: 15px;">DiskIO: {{ serverstat.diskIO }} MB/sec</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p *ngFor="let sqlinstance of sqlserverinstances">{{sqlinstance.instance.id}}</p>

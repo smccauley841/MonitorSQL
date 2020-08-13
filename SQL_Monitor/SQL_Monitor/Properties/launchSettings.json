@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "SQL_Monitor": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

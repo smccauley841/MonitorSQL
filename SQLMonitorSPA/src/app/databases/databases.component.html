@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row row-cols-5 row-cols-md-3">
+    <div class="col mb-3" *ngFor="let sqldatabase of sqldatabases">
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">
+          <p style="font-size: 15px;">{{ sqldatabase.name }}</p></div>
+        <div class="card-body">
+          <p class="card-text" style="font-size: 15px;">Server: {{ sqldatabase.instance }}</p>
+          <p class="card-text" style="font-size: 15px;">Status: {{ sqldatabase.status }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
